@@ -1,0 +1,9 @@
+{
+  "pack": {
+    "pack_format": 18,
+    "description": "Disable all underground ores"
+  },
+  "neoforge:load_conditions": {
+    "priority": 10000
+  }
+}

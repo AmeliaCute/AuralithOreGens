@@ -3,6 +3,8 @@ plugins {
     id 'maven-publish'
     id 'idea'
     id 'net.neoforged.moddev' version '2.0.116'
+
+    id "architectury-plugin" version "3.4-SNAPSHOT"
 }
 
 version = mod_version
@@ -13,6 +15,20 @@ repositories {
 
     maven {url 'https://maven.blakesmods.com'}
     maven { url 'https://modmaven.dev/'}
+
+    maven {
+        url "https://maven.ftb.dev/releases"
+        content {
+            includeGroup "dev.ftb.mods"
+        }
+    }
+    maven {
+        url "https://maven.ftb.dev/snapshots"
+        content {
+            includeGroup "dev.ftb.mods"
+        }
+    }
+
 }
 
 base {
@@ -99,12 +115,13 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 
 dependencies {
-    runtimeOnly "aztech:Modern-Industrialization:${mi_version}"
+    implementation "aztech:Modern-Industrialization:${mi_version}"
 
     runtimeOnly "com.blakebr0.cucumber:Cucumber:${minecraft_version}-${cucumber_version}"
     runtimeOnly "com.blakebr0.mysticalagriculture:MysticalAgriculture:${minecraft_version}-${mysticalagriculture_version}"
     runtimeOnly "com.blakebr0.mysticalagradditions:MysticalAgradditions:${minecraft_version}-${mysticalagradditions_version}"
 
+    implementation "dev.ftb.mods:ftb-chunks-neoforge:2101.1.13-SNAPSHOT"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

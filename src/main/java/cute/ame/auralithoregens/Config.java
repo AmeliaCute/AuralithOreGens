@@ -1,16 +1,10 @@
 package cute.ame.auralithoregens;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
@@ -25,6 +19,8 @@ public class Config {
     public static ModConfigSpec.ConfigValue<Integer> MIN_RANGE;
     public static ModConfigSpec.ConfigValue<Integer> MAX_RANGE;
 
+    public static ModConfigSpec.ConfigValue<java.util.List<? extends java.lang.String>> BLACKLIST;
+
     static
     {
         BUILDER.push("Server settings");
@@ -37,6 +33,8 @@ public class Config {
 
         MIN_VEIN_SIZE = BUILDER.define("minVeinSize", 8);
         MAX_VEIN_SIZE = BUILDER.define("maxVeinSize", 16);
+
+        BLACKLIST = BUILDER.defineListAllowEmpty("blackList", Arrays.asList("mysticalagriculture:soulium_ore"), () -> "", o -> (o instanceof String) && !((String)o).isBlank());
 
         BUILDER.pop();
         SPEC = BUILDER.build();

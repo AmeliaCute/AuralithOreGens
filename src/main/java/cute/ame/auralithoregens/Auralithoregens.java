@@ -1,54 +1,38 @@
 package cute.ame.auralithoregens;
 
-import com.mojang.logging.LogUtils;
-import cute.ame.auralithoregens.Gen.ChunkGenerationHandler;
-import cute.ame.auralithoregens.Registries.AttachementRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
-import net.neoforged.api.distmarker.Dist;
+import cute.ame.auralithoregens.Gen.OreDictionary;
+import cute.ame.auralithoregens.Registries.AttachementTypeRegistries;
+import cute.ame.auralithoregens.Registries.DataComponentRegistries;
+import cute.ame.auralithoregens.Registries.ItemRegistries;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import org.slf4j.Logger;
 
 @Mod(Auralithoregens.MODID)
-public class Auralithoregens {
+public class Auralithoregens
+{
     public static final String MODID = "auralithoregens";
 
     public Auralithoregens(IEventBus modEventBus, ModContainer modContainer)
     {
-        modEventBus.addListener(this::commonSetup);
         modContainer.registerConfig(ModConfig.Type.SERVER, Config.SPEC);
 
-        AttachementRegistry.ATTACHMENT_TYPE.register(modEventBus);
+        DataComponentRegistries.DATA_COMPONENTS.register(modEventBus);
+        AttachementTypeRegistries.ATTACHMENT_TYPES.register(modEventBus);
+
+        ItemRegistries.ITEMS.register(modEventBus);
+
+        modEventBus.addListener(this::onConfigLoad);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
+    private void onConfigLoad(ModConfigEvent event)
     {
-
+        if (event.getConfig().getSpec() == Config.SPEC)
+            OreDictionary.scanForOres();
     }
 
 }

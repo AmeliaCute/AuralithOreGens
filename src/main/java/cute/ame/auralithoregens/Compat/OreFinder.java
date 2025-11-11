@@ -5,6 +5,7 @@ import cute.ame.auralithoregens.Gen.OreDictionary;
 import cute.ame.auralithoregens.Gen.OreType;
 import cute.ame.auralithoregens.Registries.DataComponentRegistries;
 import cute.ame.auralithoregens.Renderer.OreFinderRenderer;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
@@ -58,7 +59,12 @@ public class OreFinder extends Item
         if(player.getInventory().contains(stack))
         {
             player.displayClientMessage(
-                Component.literal("§eChunk [" + pos.x + ", " + pos.z + "] contains: §b" + selectedOre.name().toString() + " Ore"),
+                    Component.literal("Chunk [")
+                            .withStyle(ChatFormatting.YELLOW)
+                            .append(Component.literal(pos.x + ", " + pos.z + "] contains: ")
+                                    .withStyle(ChatFormatting.YELLOW))
+                            .append(Component.literal(selectedOre.name() + " Ore")
+                                    .withStyle(ChatFormatting.AQUA)),
                 true
             );
         }

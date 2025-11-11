@@ -4,6 +4,11 @@ import cute.ame.auralithoregens.Gen.OreDictionary;
 import cute.ame.auralithoregens.Registries.AttachementTypeRegistries;
 import cute.ame.auralithoregens.Registries.DataComponentRegistries;
 import cute.ame.auralithoregens.Registries.ItemRegistries;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -11,6 +16,8 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+
+import javax.annotation.Nullable;
 
 @Mod(Auralithoregens.MODID)
 public class Auralithoregens

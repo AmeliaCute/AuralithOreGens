@@ -39,13 +39,13 @@ jobs:
       - name: Publish
         uses: Kir-antipov/mc-publish@v3.3
         with:
-          modrinth-id: IYJJ1bih
+          modrinth-id: VbZdG5bW
           modrinth-featured: true
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          curseforge-id: 1367705
+          curseforge-id: 1388684
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
           files: libs/auralithoregens-*.jar
-          version: auralith-${{ env.TAG_NAME }}
+          version: ${{ env.TAG_NAME }}
           version-type: alpha
           loaders: neoforge
           game-versions: 1.21.1

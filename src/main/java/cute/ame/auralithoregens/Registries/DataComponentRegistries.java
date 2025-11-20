@@ -12,8 +12,6 @@ public class DataComponentRegistries
 {
     public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Auralithoregens.MODID);
 
-    public static final Codec<String> STRING_CODEC = Codec.STRING;
-
     public static final  DeferredHolder<DataComponentType<?>, DataComponentType<String>> ORE_DATA = DATA_COMPONENTS.registerComponentType("ore_data",
             (DataComponentType.Builder<String> builder) ->
                     builder.persistent(Codec.STRING)

@@ -2,9 +2,7 @@ package cute.ame.auralithoregens;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
@@ -34,7 +32,11 @@ public class Config {
         MIN_VEIN_SIZE = BUILDER.define("minVeinSize", 8);
         MAX_VEIN_SIZE = BUILDER.define("maxVeinSize", 16);
 
-        BLACKLIST = BUILDER.defineListAllowEmpty("blackList", Arrays.asList("mysticalagriculture:soulium_ore"), () -> "", o -> (o instanceof String) && !((String)o).isBlank());
+        BLACKLIST = BUILDER.defineListAllowEmpty("blackList",
+                Arrays.asList(
+                        "mysticalagriculture:soulium_ore",
+                        "modern_industrialization:titanium_ore"
+                ), () -> "", o -> (o instanceof String) && !((String)o).isBlank());
 
         BUILDER.pop();
         SPEC = BUILDER.build();

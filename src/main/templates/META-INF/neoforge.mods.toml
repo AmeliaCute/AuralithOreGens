@@ -21,3 +21,10 @@ type = "required"
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "modern_industrialization"
+type = "required"
+version="[${mi_version},)"
+ordering = "NONE"
+side = "BOTH"

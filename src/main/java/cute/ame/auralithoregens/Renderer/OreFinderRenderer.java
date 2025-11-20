@@ -8,20 +8,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.data.ModelData;
-import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
 public class OreFinderRenderer extends BlockEntityWithoutLevelRenderer
@@ -50,7 +45,15 @@ public class OreFinderRenderer extends BlockEntityWithoutLevelRenderer
                 poseStack.translate(-0.25, 0, 0);
                 poseStack.scale(0.5f, 0.5f, 0.5f);
             }
-            case FIRST_PERSON_LEFT_HAND, FIRST_PERSON_RIGHT_HAND -> {
+            case FIRST_PERSON_LEFT_HAND -> {
+                Quaternionf quaternion = new Quaternionf();
+                quaternion.rotationXYZ((float) Math.toRadians(-12), (float) Math.toRadians(30), (float) Math.toRadians(0));
+                poseStack.mulPose(quaternion);
+                poseStack.translate(-0.25, 0, 0);
+                poseStack.scale(0.5f, 0.5f, 0.5f);
+            }
+            case FIRST_PERSON_RIGHT_HAND ->
+            {
                 Quaternionf quaternion = new Quaternionf();
                 quaternion.rotationXYZ((float) Math.toRadians(-12), (float) Math.toRadians(-30), (float) Math.toRadians(0));
                 poseStack.mulPose(quaternion);
@@ -97,47 +100,5 @@ public class OreFinderRenderer extends BlockEntityWithoutLevelRenderer
         }
         poseStack.popPose();
         poseStack.pushPose();
-    }
-
-    private void renderItemTexture(PoseStack poseStack, MultiBufferSource buffer, int packedLight, ResourceLocation textureLocation, Minecraft minecraft)
-    {
-        TextureAtlasSprite sprite = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(textureLocation);
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityCutout(InventoryMenu.BLOCK_ATLAS));
-        Matrix4f matrix = poseStack.last().pose();
-
-        // Fixed vertex order - counter-clockwise winding with correct UV mapping
-        vertexConsumer.addVertex(matrix, 0, 0, 0)
-                .setColor(0xFFFFFFFF)
-                .setUv(sprite.getU0(), sprite.getV0())
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(packedLight)
-                .setNormal(0, 0, 1);
-
-        vertexConsumer.addVertex(matrix, 1, 0, 0)
-                .setColor(0xFFFFFFFF)
-                .setUv(sprite.getU1(), sprite.getV0())
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(packedLight)
-                .setNormal(0, 0, 1);
-
-        vertexConsumer.addVertex(matrix, 1, 1, 0)
-                .setColor(0xFFFFFFFF)
-                .setUv(sprite.getU1(), sprite.getV1())
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(packedLight)
-                .setNormal(0, 0, 1);
-
-        vertexConsumer.addVertex(matrix, 0, 1, 0)
-                .setColor(0xFFFFFFFF)
-                .setUv(sprite.getU0(), sprite.getV1())
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(packedLight)
-                .setNormal(0, 0, 1);
-    }
-
-    private ResourceLocation getBlockTexture(Block block)
-    {
-        ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(block);
-        return ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), "block/" + blockId.getPath());
     }
 }

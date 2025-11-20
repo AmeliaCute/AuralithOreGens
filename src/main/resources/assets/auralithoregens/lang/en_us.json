@@ -1,5 +1,3 @@
 {
-  "itemGroup.auralithoregens": "Example Mod Tab",
-  "block.auralithoregens.example_block": "Example Block",
-  "item.auralithoregens.example_item": "Example Item"
+  "item.auralithoregens.ore_finder": "Ore Finder"
 }

@@ -37,6 +37,7 @@ public class ChunkGenerationHandler
         generateOreVeins(chunk, selectedOre, veinCount, chunkPos);
 
         chunk.setData(AttachementTypeRegistries.PROCESSED.get(), true);
+        chunk.setData(AttachementTypeRegistries.ORE_TYPE.get(), selectedOre.name());
     }
 
 

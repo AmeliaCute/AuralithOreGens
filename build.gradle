@@ -29,6 +29,9 @@ repositories {
         }
     }
 
+    maven { url 'https://maven.terraformersmc.com/'}
+    maven {url 'https://maven.blamejared.com'}
+
 }
 
 base {
@@ -117,11 +120,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
     implementation "aztech:Modern-Industrialization:${mi_version}"
 
-    runtimeOnly "com.blakebr0.cucumber:Cucumber:${minecraft_version}-${cucumber_version}"
-    runtimeOnly "com.blakebr0.mysticalagriculture:MysticalAgriculture:${minecraft_version}-${mysticalagriculture_version}"
-    runtimeOnly "com.blakebr0.mysticalagradditions:MysticalAgradditions:${minecraft_version}-${mysticalagradditions_version}"
-
-    implementation "dev.ftb.mods:ftb-chunks-neoforge:2101.1.14-SNAPSHOT"
+    runtimeOnly "dev.ftb.mods:ftb-chunks-neoforge:${chunk_version}"
+    runtimeOnly    "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -137,6 +137,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
                              mod_license            : mod_license,
                              mod_version            : mod_version,
                              mod_authors            : mod_authors,
+                             mi_version             : mi_version,
                              mod_description        : mod_description]
     inputs.properties replaceProperties
     expand replaceProperties

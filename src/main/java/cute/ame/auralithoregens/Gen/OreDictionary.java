@@ -15,7 +15,6 @@ import java.util.Random;
 public class OreDictionary
 {
     private static List<OreType> availableOres = null;
-    private static Random random = null;
 
     public static void scanForOres()
     {
@@ -40,7 +39,7 @@ public class OreDictionary
 
     public static OreType getOre(ChunkPos pos, long seed)
     {
-        long combinedSeed = pos.x * 45843495321L + pos.z * 2348283423L + seed;
+        long combinedSeed = pos.x + pos.z + seed;
         return availableOres.get(new Random(combinedSeed).nextInt(availableOres.size()));
     }
 }

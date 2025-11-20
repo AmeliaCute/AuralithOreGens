@@ -44,11 +44,11 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-id: 1388684
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          files: libs/auralithoregens-*.jar
+          files: build/libs/auralithoregens-*.jar
           version: ${{ env.TAG_NAME }}
           version-type: alpha
           loaders: neoforge
           game-versions: 1.21.1
           retry-attempts: 2
           retry-delay: 5000
-          fail-mod: fail
+          fail-mode: fail
